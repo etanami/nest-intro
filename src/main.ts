@@ -16,7 +16,13 @@ async function bootstrap() {
   );
 
   // Swagger configuration
-  const config = new DocumentBuilder().setVersion('1.0').build();
+  const config = new DocumentBuilder()
+    .setTitle('Blog app API')
+    .setDescription('Use the base API URL as http://localhost:3000')
+    .setTermsOfService('http://localhost:3000/terms-of-service')
+    .addServer('http://localhost:3000')
+    .setVersion('1.0')
+    .build();
 
   // Instantiate document
   const document = SwaggerModule.createDocument(app, config);
