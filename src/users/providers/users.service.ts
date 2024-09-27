@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { GetUserParamDto } from '../dtos/get-user-param.dto';
 
@@ -20,8 +21,9 @@ export class UsersService {
     ];
   }
 
-  public findOneById(id: number) {
+  public findOneById(id: string) {
     return {
+      id,
       firstName: 'Alice',
       email: 'alice@doe.com',
     };
