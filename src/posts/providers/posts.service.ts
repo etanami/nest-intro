@@ -21,4 +21,6 @@ export class PostsService {
       },
     ];
   }
+
+  public createPost() {}
 }
