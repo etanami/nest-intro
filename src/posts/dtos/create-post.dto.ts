@@ -17,18 +17,22 @@ import { CreatePostMetaOptionsDto } from './create-post-meta-options.dto';
 import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
+/** DTO for creating a new blog post */
 export class CreatePostDto {
+  /** Post title, minimum 4 characters */
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
   @MinLength(4)
   title: string;
 
+  /** Type of post (post/page/story/series) */
   @ApiProperty()
   @IsEnum(postType)
   @IsNotEmpty()
   postType: postType;
 
+  /** URL-friendly slug for the post */
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
@@ -38,31 +42,37 @@ export class CreatePostDto {
   })
   slug: string;
 
+  /** Current status of the post */
   @ApiProperty()
   @IsEnum(postStatus)
   @IsNotEmpty()
   status: postStatus;
 
+  /** Main content of the post */
   @ApiPropertyOptional()
   @IsString()
   @IsOptional()
   content?: string;
 
+  /** JSON schema for structured data */
   @ApiPropertyOptional()
   @IsOptional()
   @IsJSON()
   schema?: string;
 
+  /** URL to the post's featured image */
   @ApiPropertyOptional()
   @IsOptional()
   @IsUrl()
   featuredImageUrl?: string;
 
+  /** Scheduled publication date */
   @ApiPropertyOptional()
   @IsISO8601()
   @IsOptional()
   publishOn?: Date;
 
+  /** List of post tags */
   @ApiPropertyOptional()
   @IsString({ each: true })
   @IsArray()
@@ -70,6 +80,7 @@ export class CreatePostDto {
   @MinLength(3, { each: true })
   tags?: string[];
 
+  /** Additional metadata options */
   @ApiPropertyOptional()
   @IsOptional()
   @IsArray()

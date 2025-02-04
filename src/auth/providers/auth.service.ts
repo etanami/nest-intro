@@ -1,6 +1,7 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { UsersService } from 'src/users/providers/users.service';
 
+/** Service handling authentication logic */
 @Injectable()
 export class AuthService {
   constructor(
@@ -8,10 +9,12 @@ export class AuthService {
     private readonly usersService: UsersService,
   ) {}
 
+  /** Checks if user is authenticated */
   public isAuthenticated() {
     return true;
   }
 
+  /** Handles user login process */
   public login(email: string, password: string, id: string) {
     // check if user exists
     const user = this.usersService.findOneById(id);

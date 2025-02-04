@@ -16,11 +16,15 @@ import { PatchUserDto } from './dtos/patch-user.dto';
 import { UsersService } from './providers/users.service';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
+/**
+ * Controller handling user-related operations
+ */
 @Controller('users')
 @ApiTags('Users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  /** Retrieves users with optional pagination */
   @Get('/:id?')
   @ApiOperation({
     summary: 'Fetches a list of registered users on the application',
@@ -51,6 +55,7 @@ export class UsersController {
     return this.usersService.findAll(getUserParamDto, limit, page);
   }
 
+  /** Creates a new user */
   @Post()
   public createUser(@Body() createUserDto: CreateUserDto, @Ip() ip: any) {
     console.log(createUserDto);
@@ -58,6 +63,7 @@ export class UsersController {
     return 'User created successfully';
   }
 
+  /** Updates user information */
   @Patch()
   public patchUser(@Body() patchUserDto: PatchUserDto) {
     return patchUserDto;

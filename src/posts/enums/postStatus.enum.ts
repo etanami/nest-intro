@@ -1,3 +1,4 @@
+/** Enum defining possible post statuses */
 export enum postStatus {
   DRAFT = 'draft',
   SCHEDULED = 'scheduled',

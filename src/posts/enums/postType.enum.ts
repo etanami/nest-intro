@@ -1,3 +1,4 @@
+/** Enum defining possible post types */
 export enum postType {
   POST = 'post',
   PAGE = 'page',
