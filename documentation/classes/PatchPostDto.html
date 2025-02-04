@@ -130,6 +130,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>DTO for updating an existing post</p>
+
+            </p>
 
             <p class="comment">
                 <h3>Extends</h3>
@@ -208,10 +215,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/posts/dtos/patch-post.dto.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/posts/dtos/patch-post.dto.ts:11</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unique identifier of the post</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -231,7 +244,9 @@
 import { CreatePostDto } from &#x27;./create-post.dto&#x27;;
 import { IsInt, IsNotEmpty } from &#x27;class-validator&#x27;;
 
+/** DTO for updating an existing post */
 export class PatchPostDto extends PartialType(CreatePostDto) {
+  /** Unique identifier of the post */
   @ApiProperty()
   @IsInt()
   @IsNotEmpty()

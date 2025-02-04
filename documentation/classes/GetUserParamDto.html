@@ -130,6 +130,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>DTO for user query parameters</p>
+
+            </p>
 
 
 
@@ -206,10 +213,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/users/dtos/get-user-param.dto.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/users/dtos/get-user-param.dto.ts:15</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Optional user ID for filtering</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -229,7 +242,9 @@
 import { Type } from &#x27;class-transformer&#x27;;
 import { IsNumber, IsOptional } from &#x27;class-validator&#x27;;
 
+/** DTO for user query parameters */
 export class GetUserParamDto {
+  /** Optional user ID for filtering */
   @ApiPropertyOptional({
     description: &#x27;Get user with a specific id&#x27;,
     example: 123,

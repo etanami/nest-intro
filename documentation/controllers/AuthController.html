@@ -130,6 +130,13 @@
             </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Controller for authentication operations</p>
+
+            </p>
 
 
 
@@ -199,14 +206,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="11"
-                                    class="link-to-prism">src/auth/auth.controller.ts:11</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="13"
+                                    class="link-to-prism">src/auth/auth.controller.ts:13</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Handles user login</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
@@ -224,11 +233,13 @@
 import { AuthService } from &#x27;./providers/auth.service&#x27;;
 import { ApiTags } from &#x27;@nestjs/swagger&#x27;;
 
+/** Controller for authentication operations */
 @Controller(&#x27;auth&#x27;)
 @ApiTags(&#x27;Auth&#x27;)
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  /** Handles user login */
   @Get()
   public Login() {
     return this.authService.login;

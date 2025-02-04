@@ -245,14 +245,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="16"
-                                    class="link-to-prism">src/users/providers/users.service.ts:16</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="17"
+                                    class="link-to-prism">src/users/providers/users.service.ts:17</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>The method to get all the users from the database</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -338,14 +340,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="36"
-                                    class="link-to-prism">src/users/providers/users.service.ts:36</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/users/providers/users.service.ts:38</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Find a single user by the ID of the user</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -405,6 +409,7 @@ export class UsersService {
     private readonly authService: AuthService,
   ) {}
 
+  /** The method to get all the users from the database */
   public findAll(
     getUserParamDto: GetUserParamDto,
     limit: number,
@@ -425,6 +430,7 @@ export class UsersService {
     ];
   }
 
+  /** Find a single user by the ID of the user */
   public findOneById(id: string) {
     return {
       id,

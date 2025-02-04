@@ -130,6 +130,13 @@
             </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Controller for managing blog posts</p>
+
+            </p>
 
 
 
@@ -209,14 +216,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="18"
-                                    class="link-to-prism">src/posts/posts.controller.ts:18</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="21"
+                                    class="link-to-prism">src/posts/posts.controller.ts:21</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Creates a new post</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -286,14 +295,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="13"
-                                    class="link-to-prism">src/posts/posts.controller.ts:13</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="15"
+                                    class="link-to-prism">src/posts/posts.controller.ts:15</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves posts for a specific user</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -363,14 +374,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="23"
-                                    class="link-to-prism">src/posts/posts.controller.ts:23</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">src/posts/posts.controller.ts:27</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates an existing post</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -420,21 +433,25 @@ import { ApiTags } from &#x27;@nestjs/swagger&#x27;;
 import { CreatePostDto } from &#x27;src/posts/dtos/create-post.dto&#x27;;
 import { PatchPostDto } from &#x27;./dtos/patch-post.dto&#x27;;
 
+/** Controller for managing blog posts */
 @Controller(&#x27;posts&#x27;)
 @ApiTags(&#x27;Posts&#x27;)
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
+  /** Retrieves posts for a specific user */
   @Get(&#x27;/:userId?&#x27;)
   public getPosts(@Param(&#x27;userId&#x27;) userId: string) {
     return this.postsService.findAll(userId);
   }
 
+  /** Creates a new post */
   @Post()
   public createPost(@Body() createPostDto: CreatePostDto) {
     console.log(createPostDto);
   }
 
+  /** Updates an existing post */
   @Patch()
   public patchPost(@Body() patchPostDto: PatchPostDto) {
     console.log(patchPostDto);

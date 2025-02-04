@@ -130,6 +130,13 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>DTO for creating a new user</p>
+
+            </p>
 
 
 
@@ -221,10 +228,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/users/dtos/create-user.dto.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/users/dtos/create-user.dto.ts:29</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>User&#39;s email address</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -260,10 +273,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/users/dtos/create-user.dto.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/users/dtos/create-user.dto.ts:17</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>User&#39;s first name</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -300,10 +319,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/users/dtos/create-user.dto.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/users/dtos/create-user.dto.ts:24</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>User&#39;s last name (optional)</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -338,10 +363,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/users/dtos/create-user.dto.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/users/dtos/create-user.dto.ts:35</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>User&#39;s password, minimum 8 characters</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -366,23 +397,28 @@
   MinLength,
 } from &#x27;class-validator&#x27;;
 
+/** DTO for creating a new user */
 export class CreateUserDto {
+  /** User&#x27;s first name */
   @IsString()
   @IsNotEmpty()
   @MinLength(3)
   @MaxLength(96)
   firstName: string;
 
+  /** User&#x27;s last name (optional) */
   @IsString()
   @IsOptional()
   @MinLength(3)
   @MaxLength(96)
   lastName?: string;
 
+  /** User&#x27;s email address */
   @IsEmail()
   @IsNotEmpty()
   email: string;
 
+  /** User&#x27;s password, minimum 8 characters */
   @IsString()
   @IsNotEmpty()
   @MinLength(8)

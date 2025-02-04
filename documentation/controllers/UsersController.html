@@ -130,6 +130,13 @@
             </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Controller handling user-related operations</p>
+
+            </p>
 
 
 
@@ -213,14 +220,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="55"
-                                    class="link-to-prism">src/users/users.controller.ts:55</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="60"
+                                    class="link-to-prism">src/users/users.controller.ts:60</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Creates a new user</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -306,14 +315,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="46"
-                                    class="link-to-prism">src/users/users.controller.ts:46</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">src/users/users.controller.ts:50</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Retrieves users with optional pagination</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -407,14 +418,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">src/users/users.controller.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/users/users.controller.ts:68</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Updates user information</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -476,11 +489,15 @@ import { PatchUserDto } from &#x27;./dtos/patch-user.dto&#x27;;
 import { UsersService } from &#x27;./providers/users.service&#x27;;
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from &#x27;@nestjs/swagger&#x27;;
 
+/**
+ * Controller handling user-related operations
+ */
 @Controller(&#x27;users&#x27;)
 @ApiTags(&#x27;Users&#x27;)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  /** Retrieves users with optional pagination */
   @Get(&#x27;/:id?&#x27;)
   @ApiOperation({
     summary: &#x27;Fetches a list of registered users on the application&#x27;,
@@ -511,6 +528,7 @@ export class UsersController {
     return this.usersService.findAll(getUserParamDto, limit, page);
   }
 
+  /** Creates a new user */
   @Post()
   public createUser(@Body() createUserDto: CreateUserDto, @Ip() ip: any) {
     console.log(createUserDto);
@@ -518,6 +536,7 @@ export class UsersController {
     return &#x27;User created successfully&#x27;;
   }
 
+  /** Updates user information */
   @Patch()
   public patchUser(@Body() patchUserDto: PatchUserDto) {
     return patchUserDto;
