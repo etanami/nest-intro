@@ -3,7 +3,6 @@ import {
   Controller,
   DefaultValuePipe,
   Get,
-  Ip,
   Param,
   ParseIntPipe,
   Patch,
@@ -57,10 +56,8 @@ export class UsersController {
 
   /** Creates a new user */
   @Post()
-  public createUser(@Body() createUserDto: CreateUserDto, @Ip() ip: any) {
-    console.log(createUserDto);
-    console.log(ip);
-    return 'User created successfully';
+  public createUser(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.createUser(createUserDto);
   }
 
   /** Updates user information */
