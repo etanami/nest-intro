@@ -26,11 +26,13 @@ export class CreateUserDto {
   /** User's email address */
   @IsEmail()
   @IsNotEmpty()
+  @MaxLength(96)
   email: string;
 
   /** User's password, minimum 8 characters */
   @IsString()
   @IsNotEmpty()
   @MinLength(8)
+  @MaxLength(96)
   password: string;
 }
