@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { postType } from './enums/postType.enum';
 import { postStatus } from './enums/postStatus.enum';
+import { Tag } from 'src/tags/tag.entity';
 
 @Entity()
 export class Post {
@@ -63,7 +64,8 @@ export class Post {
   })
   publicOn?: string;
 
-  // worked on later
-  tags?: string;
+  @ManyToMany(() => Tag, (tag) => tag.posts)
+  tags?: Tag[];
+
   metaOptions?: string;
 }
