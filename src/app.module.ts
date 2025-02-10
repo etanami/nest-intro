@@ -6,7 +6,7 @@ import { PostsModule } from './posts/posts.module';
 import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { User } from './users/user.entity';
+//import { User } from './users/user.entity';
 import { TagsModule } from './tags/tags.module';
 import { MetaOptionsModule } from './meta-options/meta-options.module';
 
@@ -21,7 +21,8 @@ import { MetaOptionsModule } from './meta-options/meta-options.module';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres' as const,
-        entities: [User],
+        //entities: [User],
+        autoLoadEntities: true,
         synchronize: true,
         port: 5432,
         username: 'postgres',
