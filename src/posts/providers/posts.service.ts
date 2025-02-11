@@ -25,18 +25,8 @@ export class PostsService {
 
   /** Function to create a new post */
   public async create(createPostDto: CreatePostDto) {
-    // create metaOption
-    const metaOptions = createPostDto.metaOptions
-      ? await this.metaOptionsService.create(createPostDto.metaOptions)
-      : null;
-
     // create post
     const post = this.postsRepository.create(createPostDto);
-
-    // add metaOptions to the post
-    if (metaOptions) {
-      post.metaOptions = metaOptions;
-    }
 
     return await this.postsRepository.save(post);
   }

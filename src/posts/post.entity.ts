@@ -74,7 +74,9 @@ export class Post {
   // @ManyToMany(() => Tag, (tag) => tag.posts)
   // tags?: Tag[];
 
-  @OneToOne(() => MetaOption)
+  @OneToOne(() => MetaOption, {
+    cascade: true,
+  })
   @JoinColumn()
   metaOptions?: MetaOption | null;
   post: Promise<MetaOption>;
