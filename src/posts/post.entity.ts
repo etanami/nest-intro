@@ -2,13 +2,12 @@ import {
   Column,
   Entity,
   JoinColumn,
-  ManyToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { postType } from './enums/postType.enum';
 import { postStatus } from './enums/postStatus.enum';
-import { Tag } from 'src/tags/tag.entity';
+//import { Tag } from 'src/tags/tag.entity';
 import { MetaOption } from 'src/meta-options/meta-option.entity';
 
 @Entity()
@@ -72,10 +71,11 @@ export class Post {
   })
   publicOn?: string;
 
-  @ManyToMany(() => Tag, (tag) => tag.posts)
-  tags?: Tag[];
+  // @ManyToMany(() => Tag, (tag) => tag.posts)
+  // tags?: Tag[];
 
   @OneToOne(() => MetaOption)
   @JoinColumn()
-  metaOptions?: MetaOption;
+  metaOptions?: MetaOption | null;
+  post: Promise<MetaOption>;
 }

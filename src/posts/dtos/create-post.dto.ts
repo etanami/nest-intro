@@ -87,8 +87,7 @@ export class CreatePostDto {
   /** Additional metadata options */
   @ApiPropertyOptional()
   @IsOptional()
-  @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreatePostMetaOptionsDto)
-  metaOptions?: CreatePostMetaOptionsDto[];
+  metaOptions?: CreatePostMetaOptionsDto;
 }

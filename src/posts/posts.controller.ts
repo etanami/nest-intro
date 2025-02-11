@@ -19,7 +19,7 @@ export class PostsController {
   /** Creates a new post */
   @Post()
   public createPost(@Body() createPostDto: CreatePostDto) {
-    console.log(createPostDto);
+    return this.postsService.create(createPostDto);
   }
 
   /** Updates an existing post */

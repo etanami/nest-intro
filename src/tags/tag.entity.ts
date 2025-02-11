@@ -1,10 +1,9 @@
-import { Post } from 'src/posts/post.entity';
+//import { Post } from 'src/posts/post.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -57,6 +56,6 @@ export class Tag {
   @DeleteDateColumn()
   deletedAt: Date;
 
-  @ManyToMany(() => Post, (post) => post.tags)
-  posts: Post[];
+  // @ManyToMany(() => Post, (post) => post.tags)
+  // posts: Post[];
 }
