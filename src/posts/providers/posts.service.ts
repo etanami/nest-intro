@@ -32,20 +32,16 @@ export class PostsService {
   }
 
   /** Function to get all posts by a particular user */
-  public findAll(userId: string) {
+  public async findAll(userId: string) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const user = this.usersService.findOneById(userId);
 
-    return [
-      {
-        userId: user,
-        title: 'Post 1',
-        content: 'Content of post 1',
+    const posts = await this.postsRepository.find({
+      relations: {
+        metaOptions: true,
       },
-      {
-        userId: user,
-        title: 'Post 2',
-        content: 'Content of post 2',
-      },
-    ];
+    });
+
+    return await this.postsRepository.save(posts);
   }
 }
