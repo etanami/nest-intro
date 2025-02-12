@@ -16,4 +16,8 @@ export class MetaOptionsService {
 
     return await this.metaOptionsRepository.save(metaOption);
   }
+
+  public async delete(id: number) {
+    return await this.metaOptionsRepository.delete(id);
+  }
 }
