@@ -79,11 +79,10 @@ export class CreatePostDto {
 
   /** List of post tags */
   @ApiPropertyOptional()
-  @IsString({ each: true })
+  @IsInt({ each: true })
   @IsArray()
   @IsOptional()
-  @MinLength(3, { each: true })
-  tags?: string[];
+  tags?: number[];
 
   /** Additional metadata options */
   @ApiPropertyOptional()
