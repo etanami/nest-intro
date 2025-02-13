@@ -15,7 +15,7 @@ export class AuthService {
   }
 
   /** Handles user login process */
-  public login(email: string, password: string, id: string) {
+  public login(email: string, password: string, id: number) {
     // check if user exists
     const user = this.usersService.findOneById(id);
 

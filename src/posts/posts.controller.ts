@@ -22,7 +22,7 @@ export class PostsController {
 
   /** Retrieves posts for a specific user */
   @Get('/:userId?')
-  public getPosts(@Param('userId') userId: string) {
+  public getPosts(@Param('userId') userId: number) {
     return this.postsService.findAll(userId);
   }
 

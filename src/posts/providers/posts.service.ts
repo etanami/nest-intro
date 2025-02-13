@@ -25,16 +25,22 @@ export class PostsService {
 
   /** Function to create a new post */
   public async create(createPostDto: CreatePostDto) {
-    // create post
-    const post = this.postsRepository.create(createPostDto);
+    // find author from db
+    const author = await this.usersService.findOneById(createPostDto.authorId);
+
+    // create post by author
+    const post = this.postsRepository.create({
+      ...createPostDto,
+      author,
+    });
 
     return await this.postsRepository.save(post);
   }
 
   /** Function to get all posts by a particular user */
-  public async findAll(userId: string) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const user = this.usersService.findOneById(userId);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public async findAll(userId: number) {
+    // to-do
 
     const posts = await this.postsRepository.find({
       relations: {
