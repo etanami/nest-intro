@@ -72,7 +72,7 @@ export class Post {
     type: 'timestamp',
     nullable: true,
   })
-  publishedOn?: string;
+  publishOn?: Date;
 
   @ManyToMany(() => Tag)
   @JoinTable()
