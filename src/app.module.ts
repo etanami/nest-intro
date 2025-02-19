@@ -10,9 +10,15 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TagsModule } from './tags/tags.module';
 import { MetaOptionsModule } from './meta-options/meta-options.module';
 
+const ENV = process.env.NODE_ENV;
+
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      // envFilePath: ['.env.development'],
+      envFilePath: ENV ? `.env.${ENV}` : '.env',
+    }),
     UsersModule,
     PostsModule,
     AuthModule,
@@ -20,15 +26,15 @@ import { MetaOptionsModule } from './meta-options/meta-options.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        type: 'postgres' as const,
+        type: 'postgres',
         //entities: [User],
         autoLoadEntities: true,
         synchronize: true,
-        port: 5432,
-        username: 'postgres',
+        port: configService.get('PORT'),
+        username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
-        host: 'localhost',
-        database: 'nestjs-blog',
+        host: configService.get('DB_HOST'),
+        database: configService.get('DB_DATABASE'),
       }),
     }),
     TagsModule,
