@@ -13,6 +13,7 @@ import { DataSource, Repository } from 'typeorm';
 import { User } from '../user.entity';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { CreateManyUsersProvider } from './create-many-users-provider';
+import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
 
 /**
  * Class to connect to users table and perform business operations
@@ -118,7 +119,7 @@ export class UsersService {
     return user;
   }
 
-  public async createMany(createUsersDto: CreateUserDto[]) {
-    return await this.createManyUsersProvider.createMany(createUsersDto);
+  public async createMany(createManyUsersDto: CreateManyUsersDto) {
+    return await this.createManyUsersProvider.createMany(createManyUsersDto);
   }
 }
