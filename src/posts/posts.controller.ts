@@ -13,6 +13,7 @@ import { PostsService } from './providers/posts.service';
 import { ApiTags } from '@nestjs/swagger';
 import { CreatePostDto } from 'src/posts/dtos/create-post.dto';
 import { PatchPostDto } from './dtos/patch-post.dto';
+import { GetPostsDto } from './dtos/get-posts.dto';
 
 /** Controller for managing blog posts */
 @Controller('posts')
@@ -22,8 +23,11 @@ export class PostsController {
 
   /** Retrieves posts for a specific user */
   @Get('/:userId?')
-  public getPosts(@Param('userId') userId: number) {
-    return this.postsService.findAll(userId);
+  public getPosts(
+    @Param('userId') userId: number,
+    @Query() paginationQuery: GetPostsDto,
+  ) {
+    return this.postsService.findAll(paginationQuery, userId);
   }
 
   /** Creates a new post */

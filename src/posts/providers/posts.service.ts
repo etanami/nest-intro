@@ -12,6 +12,7 @@ import { CreatePostDto } from '../dtos/create-post.dto';
 import { MetaOptionsService } from 'src/meta-options/providers/meta-options.service';
 import { TagsService } from 'src/tags/providers/tags.service';
 import { PatchPostDto } from '../dtos/patch-post.dto';
+import { GetPostsDto } from '../dtos/get-posts.dto';
 
 /**
  * Class to connect and perform posts operations
@@ -78,7 +79,7 @@ export class PostsService {
 
   /** Function to get all posts by a particular user */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public async findAll(userId: number) {
+  public async findAll(paginationQuery: GetPostsDto, userId: number) {
     // to-do
 
     const posts = await this.postsRepository.find({
@@ -87,6 +88,8 @@ export class PostsService {
         author: true,
         tags: true,
       },
+      skip: (paginationQuery.page - 1) * paginationQuery.limit,
+      take: paginationQuery.limit,
     });
 
     return await this.postsRepository.save(posts);
