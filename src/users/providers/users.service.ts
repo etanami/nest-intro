@@ -14,6 +14,7 @@ import { User } from '../user.entity';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { CreateManyUsersProvider } from './create-many-users-provider';
 import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
+import { CreateUserProvider } from './create-user.provider';
 
 /**
  * Class to connect to users table and perform business operations
@@ -28,51 +29,12 @@ export class UsersService {
     private readonly usersRepository: Repository<User>,
 
     private readonly createManyUsersProvider: CreateManyUsersProvider,
+
+    private readonly createUserProvider: CreateUserProvider,
   ) {}
 
   public async createUser(createUserDto: CreateUserDto) {
-    let existingUser: User | undefined;
-
-    try {
-      // Check if user exists already
-      existingUser = await this.usersRepository.findOne({
-        where: {
-          email: createUserDto.email,
-        },
-      });
-    } catch (error) {
-      console.error('Database query error:', error);
-      throw new RequestTimeoutException(
-        'Unable to process your request at the moment. Please try again later.',
-        {
-          description: 'Error connecting to the database',
-        },
-      );
-    }
-
-    // Handle rejections
-    if (existingUser) {
-      throw new BadRequestException(
-        'The user already exists. Please check your email',
-      );
-    }
-
-    // Create a new user
-    let newUser = this.usersRepository.create(createUserDto);
-
-    // Handle exception
-    try {
-      newUser = await this.usersRepository.save(newUser);
-    } catch (error) {
-      throw new RequestTimeoutException(
-        'Unable to process your request at the moment. Please try again later.',
-        {
-          description: 'Error connecting to the database',
-        },
-      );
-    }
-
-    return newUser;
+    return this.createUserProvider.createUser(createUserDto);
   }
 
   /** The method to get all the users from the database */
