@@ -13,6 +13,7 @@ import { MetaOptionsService } from 'src/meta-options/providers/meta-options.serv
 import { TagsService } from 'src/tags/providers/tags.service';
 import { PatchPostDto } from '../dtos/patch-post.dto';
 import { GetPostsDto } from '../dtos/get-posts.dto';
+import { PaginationProvider } from 'src/common/pagination/providers/pagination.provider';
 
 /**
  * Class to connect and perform posts operations
@@ -24,11 +25,12 @@ export class PostsService {
     private readonly metaOptionsService: MetaOptionsService,
     private readonly tagsService: TagsService,
 
+    // Inject postsRepository
     @InjectRepository(Post)
     private readonly postsRepository: Repository<Post>,
 
-    // @InjectRepository(MetaOption)
-    // public readonly metaOptionsRepository: Repository<MetaOption>,
+    // Inject paginationProvider
+    private readonly paginationProvider: PaginationProvider,
   ) {}
 
   /** Function to create a new post */
@@ -79,18 +81,16 @@ export class PostsService {
 
   /** Function to get all posts by a particular user */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public async findAll(paginationQuery: GetPostsDto, userId: number) {
+  public async findAll(postQuery: GetPostsDto, userId: number) {
     // to-do
 
-    const posts = await this.postsRepository.find({
-      relations: {
-        metaOptions: true,
-        author: true,
-        tags: true,
+    const posts = await this.paginationProvider.paginateQuery(
+      {
+        limit: postQuery.limit,
+        page: postQuery.page,
       },
-      skip: (paginationQuery.page - 1) * paginationQuery.limit,
-      take: paginationQuery.limit,
-    });
+      this.postsRepository,
+    );
 
     return await this.postsRepository.save(posts);
   }
