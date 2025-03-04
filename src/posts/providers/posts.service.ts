@@ -1,8 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  RequestTimeoutException,
-} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { UsersService } from 'src/users/providers/users.service';
 import { Repository } from 'typeorm';
 import { Post } from '../post.entity';
@@ -15,6 +11,8 @@ import { PatchPostDto } from '../dtos/patch-post.dto';
 import { GetPostsDto } from '../dtos/get-posts.dto';
 import { PaginationProvider } from 'src/common/pagination/providers/pagination.provider';
 import { Paginated } from 'src/common/pagination/interfaces/paginated.interface';
+import { ActiveUserData } from 'src/auth/interfaces/active-user.interface';
+import { CreatePostProvider } from './create-post.provider';
 
 /**
  * Class to connect and perform posts operations
@@ -32,52 +30,14 @@ export class PostsService {
 
     // Inject paginationProvider
     private readonly paginationProvider: PaginationProvider,
+
+    // Inject createPostProvider
+    private readonly createPostProvider: CreatePostProvider,
   ) {}
 
   /** Function to create a new post */
-  public async create(createPostDto: CreatePostDto) {
-    let author = undefined;
-    let newPost = undefined;
-
-    try {
-      // find author from db
-      author = await this.usersService.findOneById(createPostDto.authorId);
-    } catch (error) {
-      throw new RequestTimeoutException(
-        'Unable to process your request at the moment. Please try again later.',
-        {
-          description: 'Error connecting to the database',
-        },
-      );
-    }
-
-    // check if author exists
-    if (!author) {
-      throw new BadRequestException('Author does not exist');
-    }
-
-    const tags = await this.tagsService.getMultipleTags(createPostDto.tags);
-
-    // create post by author
-    const post = this.postsRepository.create({
-      ...createPostDto,
-      author,
-      tags,
-    });
-
-    // save new post from author to DB
-    try {
-      newPost = await this.postsRepository.save(post);
-    } catch (error) {
-      throw new RequestTimeoutException(
-        'Unable to process your request at the moment. Please try again later.',
-        {
-          description: 'Error connecting to the database',
-        },
-      );
-    }
-
-    return newPost;
+  public async create(createPostDto: CreatePostDto, user: ActiveUserData) {
+    return await this.createPostProvider.create(createPostDto, user);
   }
 
   /** Function to get all posts by a particular user */

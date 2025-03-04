@@ -38,8 +38,7 @@ export class PostsController {
     @Body() createPostDto: CreatePostDto,
     @ActiveUser() user: ActiveUserData,
   ) {
-    console.log(user);
-    return this.postsService.create(createPostDto);
+    return this.postsService.create(createPostDto, user);
   }
 
   /** Updates an existing post */

@@ -26,7 +26,6 @@ export class AuthenticationGuard implements CanActivate {
     private readonly accessTokenGuard: AccessTokenGuard,
   ) {}
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    console.log(this.authTypeGuardMap);
     // AuthTypes from reflector
     const authTypes = this.reflector.getAllAndOverride(AUTH_TYPE_KEY, [
       context.getHandler(),

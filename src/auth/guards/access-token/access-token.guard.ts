@@ -38,7 +38,6 @@ export class AccessTokenGuard implements CanActivate {
         this.jwtConfiguration,
       );
 
-      console.log(payload);
       // add a new user field to request
       request[REQUEST_USER_KEY] = payload;
     } catch {
