@@ -47,9 +47,6 @@ export class UsersService {
     limit: number,
     page: number,
   ) {
-    const isAuth = this.authService.isAuthenticated();
-    console.log(isAuth);
-
     return [
       {
         firstName: 'John',

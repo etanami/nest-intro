@@ -4,6 +4,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { SignInDto } from './dtos/signin.dto';
 import { Auth } from './decorators/auth.decorator';
 import { AuthType } from './enum/auth-type.enum';
+import { RefreshTokenDto } from './dtos/refresh-token.dto';
 
 /** Controller for authentication operations */
 @Controller('auth')
@@ -20,5 +21,13 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   public signIn(@Body() signInDto: SignInDto) {
     return this.authService.signIn(signInDto);
+  }
+
+  /** Handles refresh tokens */
+  @Post('refresh-tokens')
+  @Auth(AuthType.None)
+  @HttpCode(HttpStatus.OK)
+  public refreshTokens(@Body() refreshTokenDto: RefreshTokenDto) {
+    return this.authService.refreshTokens(refreshTokenDto);
   }
 }
