@@ -2,6 +2,8 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import jwtConfig from '../config/jwt.config';
+import { User } from 'src/users/user.entity';
+import { ActiveUserData } from '../interfaces/active-user.interface';
 
 @Injectable()
 export class GenerateTokensProvider {
@@ -27,5 +29,26 @@ export class GenerateTokensProvider {
         expiresIn,
       },
     );
+  }
+
+  public async generateTokens(user: User) {
+    const [accessToken, refreshToken] = await Promise.all([
+      // Generate access token
+      this.signToken<Partial<ActiveUserData>>(
+        user.id,
+        this.jwtConfiguration.accessTokenTTL,
+        {
+          email: user.email,
+        },
+      ),
+
+      // Generate refresh token
+      this.signToken(user.id, this.jwtConfiguration.refreshTokenTTL),
+    ]);
+
+    return {
+      accessToken,
+      refreshToken,
+    };
   }
 }
