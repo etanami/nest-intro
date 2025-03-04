@@ -14,6 +14,8 @@ import { ApiTags } from '@nestjs/swagger';
 import { CreatePostDto } from 'src/posts/dtos/create-post.dto';
 import { PatchPostDto } from './dtos/patch-post.dto';
 import { GetPostsDto } from './dtos/get-posts.dto';
+import { ActiveUser } from 'src/auth/decorators/active-user.decorator';
+import { ActiveUserData } from 'src/auth/interfaces/active-user.interface';
 
 /** Controller for managing blog posts */
 @Controller('posts')
@@ -32,7 +34,11 @@ export class PostsController {
 
   /** Creates a new post */
   @Post()
-  public createPost(@Body() createPostDto: CreatePostDto) {
+  public createPost(
+    @Body() createPostDto: CreatePostDto,
+    @ActiveUser() user: ActiveUserData,
+  ) {
+    console.log(user);
     return this.postsService.create(createPostDto);
   }
 
