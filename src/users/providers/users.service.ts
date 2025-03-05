@@ -1,21 +1,19 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   BadRequestException,
-  forwardRef,
-  Inject,
   Injectable,
   RequestTimeoutException,
 } from '@nestjs/common';
 import { GetUserParamDto } from '../dtos/get-user-param.dto';
-import { AuthService } from 'src/auth/providers/auth.service';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DataSource, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { User } from '../user.entity';
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { CreateManyUsersProvider } from './create-many-users-provider';
 import { CreateManyUsersDto } from '../dtos/create-many-users.dto';
 import { CreateUserProvider } from './create-user.provider';
 import { FindOneUserByEmailProvider } from './find-one-user-by-email.provider';
+import { FindOneByGoogleIdProvider } from './find-one-by-google-id.provider';
 
 /**
  * Class to connect to users table and perform business operations
@@ -23,9 +21,6 @@ import { FindOneUserByEmailProvider } from './find-one-user-by-email.provider';
 @Injectable()
 export class UsersService {
   constructor(
-    @Inject(forwardRef(() => AuthService))
-    private readonly authService: AuthService,
-
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
 
@@ -35,6 +30,9 @@ export class UsersService {
 
     // Inject findOneUserByEmail provider
     private readonly findOneUserByEmailProvider: FindOneUserByEmailProvider,
+
+    // Inject findOneUserByEmail provider
+    private readonly findOneByGoogleIdProvider: FindOneByGoogleIdProvider,
   ) {}
 
   public async createUser(createUserDto: CreateUserDto) {
@@ -86,7 +84,13 @@ export class UsersService {
     return await this.createManyUsersProvider.createMany(createManyUsersDto);
   }
 
+  // Find a user by email
   public async findOneByEmail(email: string) {
     return await this.findOneUserByEmailProvider.findOneByEmail(email);
+  }
+
+  // Find a user by googleId
+  public async findOneByGoogleId(googleId: string) {
+    return await this.findOneByGoogleIdProvider.findOneByGoogleId(googleId);
   }
 }
